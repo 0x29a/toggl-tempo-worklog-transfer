@@ -38,8 +38,17 @@ class TogglTimesheets:
         if end_date:
             params["end_date"] = end_date
 
-        # Make request and return
-        return self.toggl.request(Endpoints.TIME_ENTRIES, parameters=params)
+        entries = self.toggl.request(
+            Endpoints.TIME_ENTRIES,
+            parameters=params
+        )
+
+        work_project_id = 162120186
+
+        return [
+            entry for entry in entries
+            if entry["pid"] == work_project_id
+        ]
 
     def _get_raw_timelogs_last_n_days(self, n_days):
         last_n_days = datetime.utcnow() - timedelta(days=n_days)
