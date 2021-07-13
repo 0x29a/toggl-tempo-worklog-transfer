@@ -137,9 +137,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     # This will update Tempo
-    if not args.n and click.confirm(
-        "\nDo you want to upload these worklogs to Tempo?", default=False
-    ):
+    if not args.n:
         last = update_tempo(grouped, logf)
         if last:
             # Stopped before everything was processed
